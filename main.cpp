@@ -14,7 +14,7 @@ char OutputData[200000000];
 int datap;
 int BuildCnt, NeedCnt;
 ofstream OutputFile("sudoku.txt");
-ofstream OutputFileSolveSudoku("SolveSudokuAnswer");
+ofstream OutputFileSolveSudoku("SolveSudokuAnswer.txt");
 void BuildAns();
 void OutputBuildSudoku();
 void BuildSudoku(char *row1rule, char*row2rule, char*row3rule);
@@ -33,17 +33,17 @@ void ResetVis(int r, int c, int num);
 
 void BuildSudoku(char *row1rule, char*row2rule, char*row3rule)
 {
-	for (int i = 0; i < 3; i++)//Ñ­»·¶ÁÈ¡Æ½ÒÆÅÅÁÐ
+	for (int i = 0; i < 3; i++)//å¾ªçŽ¯è¯»å–å¹³ç§»æŽ’åˆ—
 	{
-		//OutputDataÊý×éÎª×îÖÕÊä³öÊý×é£¬Òª´æÈëÊý¾Ý£¬¿Õ¸ñ£¬»»ÐÐ¡£
-		OutputData[datap++] = Permutation[(8+row1rule[i]-'0')%9];//½«Ñ§ºÅ¶ÔÓ¦µÄºÅÂë²åÈëÅÅÁÐµÄÎ²²¿
+		//OutputDataæ•°ç»„ä¸ºæœ€ç»ˆè¾“å‡ºæ•°ç»„ï¼Œè¦å­˜å…¥æ•°æ®ï¼Œç©ºæ ¼ï¼Œæ¢è¡Œã€‚
+		OutputData[datap++] = Permutation[(8+row1rule[i]-'0')%9];//å°†å­¦å·å¯¹åº”çš„å·ç æ’å…¥æŽ’åˆ—çš„å°¾éƒ¨
 		for (int j = 1;j<17; j++)
 		{
-			OutputData[datap++] = ' ';//´æÈë¿Õ¸ñ
+			OutputData[datap++] = ' ';//å­˜å…¥ç©ºæ ¼
 			j++;
-			OutputData[datap++] = Permutation[((16-j)/2 + row1rule[i] - '0') % 9 ];//½«Êý×é×ªÎª»·ÐÎ£¬·½±ãÆ½ÒÆ
+			OutputData[datap++] = Permutation[((16-j)/2 + row1rule[i] - '0') % 9 ];//å°†æ•°ç»„è½¬ä¸ºçŽ¯å½¢ï¼Œæ–¹ä¾¿å¹³ç§»
 		}
-		OutputData[datap++] = '\n';//´æÈë»»ÐÐ·û
+		OutputData[datap++] = '\n';//å­˜å…¥æ¢è¡Œç¬¦
 	}
 	for (int i = 0; i < 3; i++)
 	{
@@ -74,20 +74,20 @@ void BuildAns()
 	char rule1[10][5] = { "036","063" },rule2[10][5] = { "258","285","528","582","825","852" }, rule3[10][5] = { "147","174","417","471","714","741" };
 	do
 	{
-		Permutation[8] = '6';//²åÈëÓÉÑ§ºÅ»ñµÃµÄ¹Ì¶¨Êý×Öµ½ÅÅÁÐÎ²²¿
-		for (int i = 0; i < 2; i++)//×éºÏ»ñµÃ72ÖÖÅÅÁÐ·½Ê½
+		Permutation[8] = '6';//æ’å…¥ç”±å­¦å·èŽ·å¾—çš„å›ºå®šæ•°å­—åˆ°æŽ’åˆ—å°¾éƒ¨
+		for (int i = 0; i < 2; i++)//ç»„åˆèŽ·å¾—72ç§æŽ’åˆ—æ–¹å¼
 		{
 			for (int j = 0; j < 6; j++)
 			{
 				for (int k = 0; k < 6; k++)
 				{
-					BuildSudoku(rule1[i], rule2[j], rule3[k]);//´ÓÅÅÁÐÀûÓÃ±ä»»»ñµÃÍêÕûÊý¶À
+					BuildSudoku(rule1[i], rule2[j], rule3[k]);//ä»ŽæŽ’åˆ—åˆ©ç”¨å˜æ¢èŽ·å¾—å®Œæ•´æ•°ç‹¬
 					if (++BuildCnt == NeedCnt)
 						return;
 				}
 			}
 		}
-	} while (next_permutation(Permutation, Permutation + 8));//ÀûÓÃSTL¿â»ñµÃÏÂÒ»¸öÈ«ÅÅÁÐ
+	} while (next_permutation(Permutation, Permutation + 8));//åˆ©ç”¨STLåº“èŽ·å¾—ä¸‹ä¸€ä¸ªå…¨æŽ’åˆ—
 }
 void OutputBuildSudoku()
 {
@@ -203,7 +203,7 @@ int main(int argc,char*argv[])
 	}
 	else if (argc == 3 && strcmp(argv[1], "-s") == 0)
 	{
-		//ºÍ¶Áµ½×Ö·ûÊý×éÄÄ¸öÐ§ÂÊ¸ß£¿
+		//å’Œè¯»åˆ°å­—ç¬¦æ•°ç»„å“ªä¸ªæ•ˆçŽ‡é«˜ï¼Ÿ
 		char save[100];
 		int cnt = 0;
 		while (fgets(save,20,fp1))
