@@ -33,7 +33,7 @@ void ResetVis(int r, int c, int num);
 
 void BuildSudoku(char *row1rule, char*row2rule, char*row3rule)
 {
-	for (int i = 0; i < 3; i++)//循环读取平移排列
+	for (int i = 0; i < 3; i++)//循环读取平移规则
 	{
 		//OutputData数组为最终输出数组，要存入数据，空格，换行。
 		OutputData[datap++] = Permutation[(8+row1rule[i]-'0')%9];//将学号对应的号码插入排列的尾部
