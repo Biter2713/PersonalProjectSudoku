@@ -14,7 +14,7 @@ char OutputData[200000000];
 int datap;
 int BuildCnt, NeedCnt;
 ofstream OutputFile("sudoku.txt");
-ofstream OutputFileSolveSudoku("SolveSudokuAnswer.txt");
+ofstream OutputFileSolveSudoku("sudoku.txt");
 void BuildAns();
 void OutputBuildSudoku();
 void BuildSudoku(char *row1rule, char*row2rule, char*row3rule);
